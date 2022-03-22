@@ -1,5 +1,4 @@
 
-
 CREATE TABLE Tbl_perfil (
     per_idPerfil INT AUTO_INCREMENT PRIMARY KEY,
     per_NombrePerfil VARCHAR(30) NOT NULL,
