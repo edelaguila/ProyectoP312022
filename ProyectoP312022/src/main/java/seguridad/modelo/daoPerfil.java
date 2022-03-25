@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author visitante
  */
-public class clsPerfilDAO {
+public class daoPerfil {
 
     private static final String SQL_SELECT = "SELECT per_idPerfil, per_NombrePerfil, per_EstatusPerfil FROM tbl_perfil";
     private static final String SQL_INSERT = "INSERT INTO tbl_perfil(per_idPerfil,per_EstatusPerfil) VALUES(?, ?)";

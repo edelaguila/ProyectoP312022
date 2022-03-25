@@ -1,0 +1,42 @@
+d590290 Merge pull request #3 from edelaguila/ramaG4MantenimientoAplicaciones
+d8377a7 Merge pull request #4 from carlosEnriqueGC/g4mantenimientoaplicacion9491207815
+720ac54 cambios
+96b2535 mantenimiento aplicacion
+5eb1343 tdod funciona correctamente
+ac7eea1 ya funciona mantenimiento aplicaciones
+aad56a5 prueba beta
+daccf74 realizando el funcionamiento de aplicaciones
+a19a534 probando mantenimiento
+20d4e3d Merge branch 'main' of https://github.com/carlosEnriqueGC/P3E4
+619c73b Merge branch 'main' of https://github.com/carlosEnriqueGC/ProyectoP312022
+36c81a9 Cambios script BD
+dbe68a4 Merge pull request #3 from carlosEnriqueGC/temporal
+620be53 se arreglo script
+cbe0756 Merge pull request #2 from edelaguila/rama_G2_completada
+a8adf32 Merge branch 'g4_Aplicaciones_9491-20-7815' of https://github.com/carlosEnriqueGC/P3E4
+0c91e83 Uptdate
+87c8b9d Merge branch 'main' of https://github.com/DanielRoblero1/ProyectoP3E2
+a142034 update
+d47ef39 Merge pull request #5 from DanielRoblero1/9959_20_9062_G2
+533a465 AGREGAR VISUALIZACION DE PERFIL
+049c638 Merge pull request #2 from carlosEnriqueGC/g4_perfilusuario_9959203407
+cb71df1 Merge pull request #1 from carlosEnriqueGC/g4_perfilUsuario_94912013013
+944998e Merge pull request #4 from DanielRoblero1/9959_20_7425_G2
+368e9ae Merge pull request #2 from DanielRoblero1/9959_20_8724_G2
+3ee08a1 Merge pull request #1 from DanielRoblero1/9959_20_1641_G2
+d5af499 Merge branch '9959_20_1641_G2' of https://github.com/DanielRoblero1/ProyectoP3E2 into 9959_20_7425_G2
+818947f se agregar mantenimiento aplicaciones grupo4
+40bf83f cronograma de actividades grupo 4
+b4ae41b se creo el script correspondiente del grupo 4
+55461d4 Agregado el cls y el Dao para perfil
+10e7c01 Modificacion mdiGeneral y agregacion de frmMantemimientoPapps
+83e79d6 Creacion de la clase daoPerfilApps y clsPerfilAplicaciones + Script base datos
+60026ae Se agrego script base de datos
+24a50f7 Readecuacíon Proyecto Seguridad
+fc037f0 Delete prueba.txt
+2c2b31e habilitando capas del proyecto
+bed3842 Eliminacion scripts proyecto anterior
+c28dd08 Inicio Proyecto Programacion III 1 2022
+2d75c1a Merge pull request #1 from daguilae/main
+d95218e Create prueba.txt
+7f61f48 Initial commit

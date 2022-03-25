@@ -1,57 +1,107 @@
 package seguridad.controlador;
 
 public class clsUsuario {
-    private int id_usuario;
-    private String username;
-    private String password;
-
+    private int usuid;
+    private String usunombre;
+    private String usucontrasena;
+    private String usuultimasesion;
+    private String usuestatus;
+    private String usunombrereal;
+    private String usucorreoe;
+    private String usutelefono;
+    private String usudireccion;
     public clsUsuario() {
     }
 
-    public clsUsuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public clsUsuario(int p_usuid) {
+        this.usuid = p_usuid;
     }
     
-    public clsUsuario(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public clsUsuario(String p_usunombre, String p_usucontrasena) {
+        this.usunombre = p_usunombre;
+        this.usucontrasena = p_usucontrasena;
     }
     
-    public clsUsuario(int id_usuario, String username, String password) {
-        this.id_usuario = id_usuario;
-        this.username = username;
-        this.password = password;
+    public clsUsuario(int p_usuid, String p_usunombre, String p_usucontrasena) {
+        this.usuid = p_usuid;
+        this.usunombre = p_usunombre;
+        this.usucontrasena = p_usucontrasena;
     }
     
-
-    public int getId_usuario() {
-        return id_usuario;
-    }
-
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String toString() {
-        return "Usuario{" + "id_usuario=" + id_usuario + ", username=" + username + ", password=" + password + '}';
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
+    public int getUsuid() {
+        return usuid;
+    }
+
+    public void setUsuid(int usuid) {
+        this.usuid = usuid;
+    }
+
+    public String getUsunombre() {
+        return usunombre;
+    }
+
+    public void setUsunombre(String usunombre) {
+        this.usunombre = usunombre;
+    }
+
+    public String getUsucontrasena() {
+        return usucontrasena;
+    }
+
+    public void setUsucontrasena(String usucontrasena) {
+        this.usucontrasena = usucontrasena;
+    }
+
+    public String getUsuultimasesion() {
+        return usuultimasesion;
+    }
+
+    public void setUsuultimasesion(String usuultimasesion) {
+        this.usuultimasesion = usuultimasesion;
+    }
+
+    public String getUsuestatus() {
+        return usuestatus;
+    }
+
+    public void setUsuestatus(String usuestatus) {
+        this.usuestatus = usuestatus;
+    }
+
+    public String getUsunombrereal() {
+        return usunombrereal;
+    }
+
+    public void setUsunombrereal(String usunombrereal) {
+        this.usunombrereal = usunombrereal;
+    }
+
+    public String getUsucorreoe() {
+        return usucorreoe;
+    }
+
+    public void setUsucorreoe(String usucorreoe) {
+        this.usucorreoe = usucorreoe;
+    }
+
+    public String getUsutelefono() {
+        return usutelefono;
+    }
+
+    public void setUsutelefono(String usutelefono) {
+        this.usutelefono = usutelefono;
+    }
+
+    public String getUsudireccion() {
+        return usudireccion;
+    }
+
+    public void setUsudireccion(String usudireccion) {
+        this.usudireccion = usudireccion;
+    }
 }
