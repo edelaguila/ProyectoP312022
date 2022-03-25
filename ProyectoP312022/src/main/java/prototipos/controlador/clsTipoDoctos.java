@@ -38,25 +38,25 @@ public class clsTipoDoctos {
         return sdoc_nombre;
     }
 
-    public void setnombreperfil(String snombre) {
-        this.sper_nombre = snombre;
+    public void setNombre(String snombre) {
+        this.sdoc_nombre = snombre;
     }
 
-    public String getnombreperfil() {
-        return sper_estado;
+    public String getNombre() {
+        return sdoc_nombre;
     }
 
-    public void setEstado(String sestado) {
-        this.sper_estado = sestado;
+    public void setestado(String sestado) {
+        this.sdoc_estado = sestado;
     }
     
     public String getEstado() {
-        return sper_estado;
+        return sdoc_estado;
     }
 
     @Override
     public String toString() {
-        return "tbl_perfil{" + "per_idPerfil=" + iper_id + ", per_NombrePerfil=" + sper_nombre + ", per_EstatusPerfil=" + sper_estado + '}';
+        return "tbl_perfil{" + "per_idPerfil=" + idoc_id + ", per_NombrePerfil=" + sdoc_nombre + ", per_EstatusPerfil=" + sdoc_estado + '}';
     }
     
     
