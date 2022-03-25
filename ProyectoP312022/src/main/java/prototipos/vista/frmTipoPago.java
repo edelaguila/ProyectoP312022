@@ -17,7 +17,7 @@ import java.io.File;
  *
  * @author visitante
  */
-public class frmMantenimientoTipoPago extends javax.swing.JInternalFrame {
+public class frmTipoPago extends javax.swing.JInternalFrame {
 
     public void llenadoDeCombos() {
         daoTipoPago AplicacionDAO = new daoTipoPago();
@@ -55,7 +55,7 @@ public class frmMantenimientoTipoPago extends javax.swing.JInternalFrame {
         txtEstado.setText(aplicacionAConsultar.getestadoAplicacion());
     }
 
-    public frmMantenimientoTipoPago() {
+    public frmTipoPago() {
         initComponents();
         llenadoDeTablas();
         llenadoDeCombos();

@@ -146,7 +146,7 @@ public class mdiGeneralg2 extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        frmMantenimientoTipoPago ventana = new frmMantenimientoTipoPago();
+        frmTipoPago ventana = new frmTipoPago();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana.getSize();
