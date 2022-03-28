@@ -1,60 +1,57 @@
 package seguridad.controlador;
 
 public class clsPerfil {
-    private int iper_id;
-    private String sper_nombre;
-    private String sper_estado;
+    private int perid;
+    private String pernombre;
+    private String perestatus;
 
     public clsPerfil() {
     }
 
-    public clsPerfil(int iid) {
-        this.iper_id = iid;
+    public clsPerfil(int perid) {
+        this.perid = perid;
     }
     
-    public clsPerfil(String snombre, String sestado) {
-        this.sper_nombre = snombre;
-        this.sper_estado = sestado;
+    public clsPerfil(String pernombre, String perestatus) {
+        this.pernombre = pernombre;
+        this.perestatus = perestatus;
     }
     
-    public clsPerfil(int iid, String snombre, String sestado) {
-        this.iper_id = iid;
-        this.sper_nombre = snombre;
-        this.sper_estado = sestado;
+    public clsPerfil(int perid, String pernombre, String perestatus) {
+        this.perid = perid;
+        this.pernombre = pernombre;
+        this.perestatus = perestatus;
     }
     
 
     public int getId_perfil() {
-        return iper_id;
+        return perid;
     }
 
     public void setId_perfil(int iid) {
-        this.iper_id = iid;
+        this.perid = iid;
     }
 
-    public String getperfil() {
-        return sper_nombre;
-    }
 
     public void setnombreperfil(String snombre) {
-        this.sper_nombre = snombre;
+        this.pernombre = snombre;
     }
 
     public String getnombreperfil() {
-        return sper_estado;
+        return pernombre;
     }
 
     public void setEstado(String sestado) {
-        this.sper_estado = sestado;
+        this.perestatus = sestado;
     }
     
     public String getEstado() {
-        return sper_estado;
+        return perestatus;
     }
 
     @Override
     public String toString() {
-        return "tbl_perfil{" + "per_idPerfil=" + iper_id + ", per_NombrePerfil=" + sper_nombre + ", per_EstatusPerfil=" + sper_estado + '}';
+        return "tbl_perfil{" + "perid=" + perid + ", pernombre=" + pernombre + ", perestatus=" + perestatus + '}';
     }
     
     

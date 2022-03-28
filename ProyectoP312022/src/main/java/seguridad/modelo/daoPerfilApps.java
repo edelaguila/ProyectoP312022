@@ -16,11 +16,11 @@ import java.util.List;
  */
 public class daoPerfilApps {
 
-    private static final String SQL_SELECT = "SELECT apl_idPerfil,apl_idaplicacion FROM tbl_aplicacionesperfil";
-    private static final String SQL_INSERT = "INSERT INTO tbl_aplicacionesperfil(apl_idPerfil, apl_idaplicacion) VALUES(?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_aplicacionesperfil SET apl_idPerfil=?, apl_idaplicacion=? WHERE apl_idPerfil = ?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_aplicacionesperfil WHERE apl_idPerfil=?";
-    private static final String SQL_QUERY = "SELECT apl_idPerfil, apl_idaplicacion FROM tbl_aplicacionesperfil WHERE tbl_aplicacionesperfil = ?";
+    private static final String SQL_SELECT = "SELECT perid,aplid FROM tbl_aplicacionperfil";
+    private static final String SQL_INSERT = "INSERT INTO tbl_aplicacionperfil(perid, aplid) VALUES(?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_aplicacionperfil SET perid=?, aplid=? WHERE perid = ?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_aplicacionesperfil WHERE perid=?";
+    private static final String SQL_QUERY = "SELECT perid, aplid FROM tbl_aplicacionperfil WHERE tbl_aplicacionperfil = ?";
 
     public List<clsPerfilAplicaciones> select() {
         Connection conn = null;
@@ -34,8 +34,8 @@ public class daoPerfilApps {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 
-                String perfil = rs.getString("apl_idPerfil");
-                String aplicacion = rs.getString("apl_idaplicacion");
+                String perfil = rs.getString("perid");
+                String aplicacion = rs.getString("aplid");
 
                 usuario = new clsPerfilAplicaciones();
                
@@ -136,8 +136,8 @@ public class daoPerfilApps {
             stmt.setString(1, perfil_app.getUsername());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                String username = rs.getString("apl_idPerfil");
-                String password = rs.getString("apl_idaplicacion");
+                String username = rs.getString("perid");
+                String password = rs.getString("aplid");
 
                 perfil_app = new clsPerfilAplicaciones();
                 perfil_app.setUsername(username);

@@ -16,11 +16,11 @@ import java.util.List;
  */
 public class daoPerfil {
 
-    private static final String SQL_SELECT = "SELECT per_idPerfil, per_NombrePerfil, per_EstatusPerfil FROM tbl_perfil";
-    private static final String SQL_INSERT = "INSERT INTO tbl_perfil(per_idPerfil,per_EstatusPerfil) VALUES(?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_perfil SET per_idPerfil=?, per_EstatusPerfil=? WHERE per_idPerfil = ?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_perfil WHERE per_idPerfil=?";
-    private static final String SQL_QUERY = "SELECT per_idPerfil, per_NombrePerfil, per_EstatusPerfil FROM tbl_perfil WHERE per_NombrePerfil = ?";
+    private static final String SQL_SELECT = "SELECT perid, pernombre, perestatus FROM tbl_perfil";
+    private static final String SQL_INSERT = "INSERT INTO tbl_perfil(pernombre,perestatus) VALUES(?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_perfil SET pernombre=?, perestatus=? WHERE perid = ?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_perfil WHERE perid=?";
+    private static final String SQL_QUERY = "SELECT perid, pernombre, perestatus FROM tbl_perfil WHERE perid = ?";
 
     public List<clsPerfil> select() {
         Connection conn = null;
@@ -33,9 +33,9 @@ public class daoPerfil {
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int iPerfil_id = rs.getInt("per_idPerfil");
-                String sPerfil_nombre = rs.getString("per_NombrePerfil");
-                String sPerfil_estado = rs.getString("per_EstatusPerfil");
+                int iPerfil_id = rs.getInt("perid");
+                String sPerfil_nombre = rs.getString("pernombre");
+                String sPerfil_estado = rs.getString("perestatus");
 
                 usuario = new clsPerfil();
                 usuario.setId_perfil(iPerfil_id);
@@ -137,9 +137,9 @@ public class daoPerfil {
             stmt.setString(1, perfil.getnombreperfil());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int iPerfil_id = rs.getInt("per_idPerfil");
-                String sPerfil_nombre = rs.getString("per_NombrePerfil");
-                String sPerfil_estado = rs.getString("per_EstatusPerfil");
+                int iPerfil_id = rs.getInt("perid");
+                String sPerfil_nombre = rs.getString("pernombre");
+                String sPerfil_estado = rs.getString("perestatus");
 
                 perfil = new clsPerfil();
                 perfil.setId_perfil(iPerfil_id);
