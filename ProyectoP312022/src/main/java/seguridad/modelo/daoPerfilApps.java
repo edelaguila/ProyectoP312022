@@ -155,4 +155,8 @@ public class daoPerfilApps {
         //return personas;  // Si se utiliza un ArrayList
         return perfil_app;
     }
+
+    public clsPerfilAplicaciones query2(clsPerfilAplicaciones vendedorAConsultar) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
