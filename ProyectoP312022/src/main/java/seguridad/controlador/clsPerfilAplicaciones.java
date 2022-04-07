@@ -2,42 +2,51 @@ package seguridad.controlador;
 
 public class clsPerfilAplicaciones {
 
-    private String apl_idPerfil;
-    private String apl_idaplicacion;
+    private String perid;
+    private String aplid;
+    private String aplnombre;
 
     public clsPerfilAplicaciones() {
     }
 
-
-    
-    public clsPerfilAplicaciones(String apl_idPerfil, String apl_idaplicacion) {
-        this.apl_idPerfil = apl_idPerfil;
-        this.apl_idaplicacion = apl_idaplicacion;
+    public clsPerfilAplicaciones(String perid, String aplid, String aplnombre) {
+        this.perid = perid;
+        this.aplid = aplid;
+        this.aplnombre = aplnombre;
     }
-    
- 
+
    
+    
+    
+    
 
-    public String getUsername() {
-        return apl_idPerfil;
+    public String getPerid() {
+        return perid;
     }
 
-    public void setUsername(String apl_idPerfil) {
-        this.apl_idPerfil= apl_idPerfil;
+    public void setPerid(String perid) {
+        this.perid = perid;
     }
 
-    public String getPassword() {
-        return apl_idaplicacion;
+    public String getAplid() {
+        return aplid;
     }
 
-    public void setPassword(String apl_idaplicacion) {
-        this.apl_idaplicacion = apl_idaplicacion;
+    public void setAplid(String aplid) {
+        this.aplid = aplid;
+    }
+
+    public String getAplnombre() {
+        return aplnombre;
+    }
+
+    public void setAplnombre(String aplnombre) {
+        this.aplnombre = aplnombre;
     }
 
     @Override
     public String toString() {
-        return "PerfilAplicacion{"  + " Pefil=" + apl_idPerfil + ", aplicacion=" + apl_idaplicacion + '}';
+        return "clsPerfilAplicaciones{" + "perid=" + perid + ", aplid=" + aplid + ", aplnombre=" + aplnombre + '}';
     }
-    
     
 }

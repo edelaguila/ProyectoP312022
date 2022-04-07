@@ -5,11 +5,15 @@
  */
 package seguridad.vista;
 
-import seguridad.modelo.daoPerfilApps;
-import seguridad.controlador.clsPerfilAplicaciones;
 
+import seguridad.modelo.daoPerfilApps;
+import seguridad.modelo.daoAplicacion;
+import seguridad.controlador.clsPerfilAplicaciones;
+import seguridad.controlador.clsAplicacion;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import seguridad.controlador.clsPerfil;
+import seguridad.modelo.daoPerfil;
 
 
 /**
@@ -17,29 +21,70 @@ import javax.swing.table.DefaultTableModel;
  * @author visitante
  */
 public class frmMantenimientoPapps extends javax.swing.JInternalFrame {
+    
 
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
+        
+        modelo.addColumn("ID");
         modelo.addColumn("Aplicacion");
         
-        
-        daoPerfilApps daoPefilAPPS = new daoPerfilApps();
-        List<clsPerfilAplicaciones> Pefilapps = daoPefilAPPS.select();
+        daoAplicacion aplicacionDAO = new daoAplicacion();
+        List<clsAplicacion> aplicaciones = aplicacionDAO.select();
         tablaVendedores.setModel(modelo);
+        
         String[] dato = new String[3];
-        for (int i = 0; i < Pefilapps.size(); i++) {
-            dato[0] = Pefilapps.get(i).getPassword();
+        for (int i = 0; i < aplicaciones.size(); i++) {
+            
+             dato[0] = Integer.toString(aplicaciones.get(i).getId_aplicacion());
+            dato[1] = aplicaciones.get(i).getNombreAplicacion();
+        
+           
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
+        
     }
+      
+   
+    public void buscarVendedor()
+    {
+        clsPerfilAplicaciones AConsultar = new clsPerfilAplicaciones();
+        daoPerfilApps perDAO = new daoPerfilApps();
+        AConsultar.setPerid(txtperid.getText());
+        DefaultTableModel modelo = new DefaultTableModel();
+            
+        modelo.addColumn("PerfilID");
+        modelo.addColumn("AplicacionID");
+        modelo.addColumn("NombreAPL");
+        
+        //daoPerfilApps aplicacion = new daoPerfilApps();
+        List<clsPerfilAplicaciones> aplicaciones = perDAO.select2(AConsultar);
+        tablaAsignacion.setModel(modelo);
+                
+        String[] dato = new String[3];
+        for (int i = 0; i < aplicaciones.size(); i++) {
+            dato[0] = aplicaciones.get(i).getAplid();
+            dato[1] = aplicaciones.get(i).getPerid();
+            dato[2] = aplicaciones.get(i).getAplnombre();
+           
+            //System.out.println("vendedor:" + vendedores);
+            modelo.addRow(dato);
+        }
+    
+    }
+           
+           
+
+    
 
    
 
     public frmMantenimientoPapps() {
         initComponents();
         llenadoDeTablas(); 
+     
     }
 
     /**
@@ -58,7 +103,7 @@ public class frmMantenimientoPapps extends javax.swing.JInternalFrame {
         lbl_Aaplicacion = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lbl_code = new javax.swing.JLabel();
-        txt_IDperfil = new javax.swing.JTextField();
+        txtapid = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaVendedores = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
@@ -66,6 +111,8 @@ public class frmMantenimientoPapps extends javax.swing.JInternalFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtperid = new javax.swing.JTextField();
+        lbl_code1 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -75,6 +122,7 @@ public class frmMantenimientoPapps extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Mantenimiento Perfil aplicaciones");
+        setPreferredSize(new java.awt.Dimension(900, 400));
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -84,20 +132,12 @@ public class frmMantenimientoPapps extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID Vendedor", "ID Empleado", "Correo", "Telefono", "Direccion", "Porcentaje", "Comision"
+                "Aplicacion"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane2.setViewportView(tablaAsignacion);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 270, 210));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 300, 210));
 
         lbl_Aaplicacion.setText("Asignacion de Aplicaciones");
         getContentPane().add(lbl_Aaplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, -1, -1));
@@ -105,15 +145,15 @@ public class frmMantenimientoPapps extends javax.swing.JInternalFrame {
         jLabel2.setText("Aplicaciones ");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, -1, -1));
 
-        lbl_code.setText("CODIGO PERFIIL:");
-        getContentPane().add(lbl_code, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 100, -1));
+        lbl_code.setText("Codigo de la App A insertar");
+        getContentPane().add(lbl_code, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 150, -1));
 
-        txt_IDperfil.addActionListener(new java.awt.event.ActionListener() {
+        txtapid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_IDperfilActionPerformed(evt);
+                txtapidActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_IDperfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 100, -1));
+        getContentPane().add(txtapid, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 100, -1));
 
         tablaVendedores.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tablaVendedores.setModel(new javax.swing.table.DefaultTableModel(
@@ -142,10 +182,10 @@ public class frmMantenimientoPapps extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(403, 140, 80, -1));
 
         jButton3.setText("Eliminar");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 180, 80, -1));
 
         jButton4.setText("Agregar todos");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -153,28 +193,70 @@ public class frmMantenimientoPapps extends javax.swing.JInternalFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 220, 80, -1));
 
         jButton5.setText("Eliminar todos");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, -1, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 260, 80, -1));
 
         jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, -1, -1));
+
+        txtperid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtperidActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtperid, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 100, -1));
+
+        lbl_code1.setText("CODIGO PERFIIL:");
+        getContentPane().add(lbl_code1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 100, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_IDperfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_IDperfilActionPerformed
+    private void txtapidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtapidActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_IDperfilActionPerformed
+    }//GEN-LAST:event_txtapidActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+                                               
+           daoPerfilApps vendedorDAO = new daoPerfilApps();
+        clsPerfilAplicaciones vendedorAInsertar = new clsPerfilAplicaciones();
+        vendedorAInsertar.setPerid(txtperid.getText());
+         vendedorAInsertar.setAplid(txtapid.getText());
+        vendedorDAO.insert(vendedorAInsertar);
+        llenadoDeTablas();
+   
+        
+
+
+
+
+
+
+
+        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+            buscarVendedor();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtperidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtperidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtperidActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -189,9 +271,11 @@ public class frmMantenimientoPapps extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbl_Aaplicacion;
     private javax.swing.JLabel lbl_code;
+    private javax.swing.JLabel lbl_code1;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaAsignacion;
     private javax.swing.JTable tablaVendedores;
-    private javax.swing.JTextField txt_IDperfil;
+    private javax.swing.JTextField txtapid;
+    private javax.swing.JTextField txtperid;
     // End of variables declaration//GEN-END:variables
 }
