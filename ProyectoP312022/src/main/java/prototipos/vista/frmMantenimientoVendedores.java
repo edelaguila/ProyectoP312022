@@ -6,12 +6,13 @@
 package prototipos.vista;
 
 
-import seguridad.vista.*;
 import prototipos.modelo.daoVendedores;
 import prototipos.controlador.clsVendedores;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
+
+
 
 /**
  *
@@ -20,15 +21,52 @@ import java.io.File;
 public class frmMantenimientoVendedores extends javax.swing.JInternalFrame {
 
     public void llenadoDeCombos() {
-        
+        daoVendedores vendedorDAO = new daoVendedores();
+        List<clsVendedores> vendedores = vendedorDAO.select();
+        cbox_aplicacion.addItem("Seleccione una opción");
+        for (int i = 0; i < vendedores.size(); i++) {
+            cbox_aplicacion.addItem(String.valueOf(vendedores.get(i).fGetid_Vendedores()));
+        }
     }
 
     public void llenadoDeTablas() {
-        
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID Vendedor");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Direccion");
+       modelo.addColumn("Telefono");
+        modelo.addColumn("Correo");
+        modelo.addColumn("Estado");
+        modelo.addColumn("Tipo");
+
+        daoVendedores vendedorDAO = new daoVendedores();
+        List<clsVendedores> vendedores = vendedorDAO.select();
+        tablaVendedores.setModel(modelo);
+        String[] dato = new String[7];
+        for (int i = 0; i < vendedores.size(); i++) {
+            dato[0] = Integer.toString(vendedores.get(i).fGetid_Vendedores());
+            dato[1] = vendedores.get(i).fGetnombre_Vendedores();
+            dato[2] = vendedores.get(i).fGetdireccion_Vendedores();
+            dato[3] = Integer.toString(vendedores.get(i).fGettelefono_Vendedores());
+            dato[4] =vendedores.get(i).fGetcorreo_Vendedores();
+            dato[5] = vendedores.get(i).fGetestado_Vendedores();
+            dato[6] = vendedores.get(i).fGettipo_Vendedores();
+            //System.out.println("vendedor:" + vendedores);
+            modelo.addRow(dato);
+        }
     }
 
-    public void buscaraplicacion() {
-        
+    public void buscarVendedor() {
+        clsVendedores vendedorAConsultar = new clsVendedores();
+        daoVendedores vendedorDAO = new daoVendedores();
+        vendedorAConsultar.fSetid_Vendedores(Integer.parseInt(txtbuscado.getText()));
+        vendedorAConsultar = vendedorDAO.query(vendedorAConsultar);
+        txtNombre.setText(vendedorAConsultar.fGetnombre_Vendedores());
+        txtDireccion.setText(vendedorAConsultar.fGetdireccion_Vendedores());
+        txtTelefono.setText(String.valueOf(vendedorAConsultar.fGettelefono_Vendedores()));
+        txtCorreo.setText(vendedorAConsultar.fGetcorreo_Vendedores());
+        txtEstado.setText(vendedorAConsultar.fGetestado_Vendedores());
+        txtTipo.setText(vendedorAConsultar.fGettipo_Vendedores());
     }
 
     public frmMantenimientoVendedores() {
@@ -57,14 +95,22 @@ public class frmMantenimientoVendedores extends javax.swing.JInternalFrame {
         txtbuscado = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaAplicaciones = new javax.swing.JTable();
         cbox_aplicacion = new javax.swing.JComboBox<>();
         label4 = new javax.swing.JLabel();
-        txtEstado = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
         label5 = new javax.swing.JLabel();
         lb = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        txtTelefono = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
+        label6 = new javax.swing.JLabel();
+        label7 = new javax.swing.JLabel();
+        txtEstado = new javax.swing.JTextField();
+        txtTipo = new javax.swing.JTextField();
+        label8 = new javax.swing.JLabel();
+        label9 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaVendedores = new javax.swing.JTable();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -121,25 +167,6 @@ public class frmMantenimientoVendedores extends javax.swing.JInternalFrame {
             }
         });
 
-        tablaAplicaciones.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaAplicaciones.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID Aplicacion", "Nombre", "Estado"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tablaAplicaciones);
-
         cbox_aplicacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cbox_aplicacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,12 +177,12 @@ public class frmMantenimientoVendedores extends javax.swing.JInternalFrame {
         label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label4.setText("Vendedor");
 
-        txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtEstado.setOpaque(false);
+        txtDireccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtDireccion.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtDireccion.setOpaque(false);
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label5.setText("Estado");
+        label5.setText("Direccion");
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
@@ -166,6 +193,53 @@ public class frmMantenimientoVendedores extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtTelefono.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtTelefono.setOpaque(false);
+
+        txtCorreo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtCorreo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtCorreo.setOpaque(false);
+
+        label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label6.setText("Correo");
+
+        label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label7.setText("Telefono");
+
+        txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtEstado.setOpaque(false);
+
+        txtTipo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtTipo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtTipo.setOpaque(false);
+
+        label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label8.setText("Tipo");
+
+        label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label9.setText("Estado");
+
+        tablaVendedores.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablaVendedores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID Vendedor", "ID Empleado", "Correo", "Telefono", "Direccion", "Porcentaje", "Comision"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaVendedores);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,19 +269,37 @@ public class frmMantenimientoVendedores extends javax.swing.JInternalFrame {
                             .addComponent(label5))
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                             .addComponent(txtNombre))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label7)
+                            .addComponent(label6))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCorreo)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label9)
+                            .addComponent(label8))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTipo)
+                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
                         .addComponent(label1)
-                        .addGap(294, 294, 294))))
+                        .addGap(294, 294, 294))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
+                        .addGap(30, 30, 30))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
@@ -222,8 +314,15 @@ public class frmMantenimientoVendedores extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(label1)
                 .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label4)
+                            .addComponent(cbox_aplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2))
+                        .addGap(0, 21, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -233,9 +332,25 @@ public class frmMantenimientoVendedores extends javax.swing.JInternalFrame {
                                     .addComponent(label3))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(label5)))
                             .addComponent(lb))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label7))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label9))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnRegistrar)
@@ -246,12 +361,7 @@ public class frmMantenimientoVendedores extends javax.swing.JInternalFrame {
                             .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBuscar)
                             .addComponent(btnLimpiar))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label4)
-                    .addComponent(cbox_aplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -259,27 +369,54 @@ public class frmMantenimientoVendedores extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        
+        daoVendedores vendedorDAO = new daoVendedores();
+        clsVendedores vendedorAEliminar = new clsVendedores();
+        vendedorAEliminar.fSetid_Vendedores(Integer.parseInt(txtbuscado.getText()));
+        vendedorDAO.delete(vendedorAEliminar);
+        llenadoDeTablas();        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        
+        daoVendedores vendedorDAO = new daoVendedores();
+        clsVendedores vendedorAInsertar = new clsVendedores();
+        vendedorAInsertar.fSetnombre_Vendedores(txtNombre.getText());
+        vendedorAInsertar.fSetdireccion_Vendedores(txtDireccion.getText());
+        vendedorAInsertar.fSettelefono_Vendedores(Integer.parseInt(txtTelefono.getText()));
+        vendedorAInsertar.fSetcorreo_Vendedores(txtCorreo.getText());
+        vendedorAInsertar.fSetestado_Vendedores(txtDireccion.getText());
+        vendedorAInsertar.fSettipo_Vendedores(txtTipo.getText());
+        vendedorDAO.insert(vendedorAInsertar);
+        llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        buscaraplicacion();
+        buscarVendedor();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-//        // TODO add your handling code here:
-        
+        // TODO add your handling code here:
+        daoVendedores vendedorDAO = new daoVendedores();
+        clsVendedores vendedorAActualizar = new clsVendedores();
+        vendedorAActualizar.fSetid_Vendedores(Integer.parseInt(txtbuscado.getText()));
+        vendedorAActualizar.fSetnombre_Vendedores(txtNombre.getText());
+        vendedorAActualizar.fSetdireccion_Vendedores(txtDireccion.getText());
+        vendedorAActualizar.fSettelefono_Vendedores(Integer.parseInt(txtTelefono.getText()));
+        vendedorAActualizar.fSetcorreo_Vendedores(txtCorreo.getText());
+        vendedorAActualizar.fSetestado_Vendedores(txtDireccion.getText());
+        vendedorAActualizar.fSettipo_Vendedores(txtTipo.getText());
+        vendedorDAO.update(vendedorAActualizar);
+        llenadoDeTablas();        
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         cbox_aplicacion.setSelectedIndex(0);
         txtNombre.setText("");
+        txtDireccion.setText("");
+        txtTelefono.setText("");
+        txtCorreo.setText("");
         txtEstado.setText("");
+        txtTipo.setText("");
         txtbuscado.setText("");
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
@@ -324,12 +461,20 @@ public class frmMantenimientoVendedores extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label3;
     private javax.swing.JLabel label4;
     private javax.swing.JLabel label5;
+    private javax.swing.JLabel label6;
+    private javax.swing.JLabel label7;
+    private javax.swing.JLabel label8;
+    private javax.swing.JLabel label9;
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
-    private javax.swing.JTable tablaAplicaciones;
+    private javax.swing.JTable tablaVendedores;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTelefono;
+    private javax.swing.JTextField txtTipo;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables
 }
