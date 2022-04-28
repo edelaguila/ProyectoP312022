@@ -69,5 +69,64 @@ CREATE TABLE IF NOT EXISTS tbl_bitacora (
 	FOREIGN KEY (usuid) references tbl_usuario (usuid)    
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;	
 
-   
+CREATE TABLE IF NOT EXISTS tbl_productos (
+	proid INT NOT NULL AUTO_INCREMENT,
+	pronombre VARCHAR(60) NOT NULL,
+	proestatus VARCHAR(1) NOT NULL,
+	PRIMARY KEY (proid) )
+ENGINE = InnoDB CHARACTER SET = latin1;
 
+CREATE TABLE IF NOT EXISTS tbl_marcas (
+	marid INT NOT NULL AUTO_INCREMENT,
+	marnombre VARCHAR(60) NOT NULL,
+	marestatus VARCHAR(1) NOT NULL,
+    proid INT NOT NULL,
+	PRIMARY KEY (marid),
+    FOREIGN KEY (proid) references tbl_productos (proid))
+ENGINE = InnoDB CHARACTER SET = latin1;
+
+CREATE TABLE IF NOT EXISTS tbl_lineas (
+	linid INT NOT NULL AUTO_INCREMENT,
+	linnombre VARCHAR(60) NOT NULL,
+	linestatus VARCHAR(1) NOT NULL,
+    proid INT NOT NULL,
+    marid INT NOT NULL,
+	PRIMARY KEY (linid),
+    FOREIGN KEY (proid) references tbl_productos (proid),
+    FOREIGN KEY (marid) references tbl_marca (marid))
+ENGINE = InnoDB CHARACTER SET = latin1;
+
+CREATE TABLE IF NOT EXISTS tbl_bodegas (
+	bodid INT NOT NULL AUTO_INCREMENT,
+	bodnombre VARCHAR(60) NOT NULL,
+	bodestatus VARCHAR(1) NOT NULL,
+	PRIMARY KEY (bodid) )
+ENGINE = InnoDB CHARACTER SET = latin1;
+
+CREATE TABLE IF NOT EXISTS tbl_traslados (
+	traid INT NOT NULL AUTO_INCREMENT,
+	tranombre VARCHAR(60) NOT NULL,
+	traestatus VARCHAR(1) NOT NULL,
+    proid INT NOT NULL,
+    marid INT NOT NULL,
+    linid INT NOT NULL,
+    bodid INT NOT NULL,
+	PRIMARY KEY (traid),
+    FOREIGN KEY (proid) references tbl_productos (proid),
+    FOREIGN KEY (marid) references tbl_marca (marid),
+    FOREIGN KEY (linid) references tbl_linea (linid),
+    FOREIGN KEY (bodid) references tbl_bodegas (bodid))
+ENGINE = InnoDB CHARACTER SET = latin1;
+
+CREATE TABLE IF NOT EXISTS tbl_inventario (
+	invid INT NOT NULL AUTO_INCREMENT,
+    proid INT NOT NULL,
+    marid INT NOT NULL,
+    linid INT NOT NULL,
+    bodid INT NOT NULL,
+	PRIMARY KEY (invid),
+    FOREIGN KEY (proid) references tbl_productos (proid),
+    FOREIGN KEY (marid) references tbl_marca (marid),
+    FOREIGN KEY (linid) references tbl_linea (linid),
+    FOREIGN KEY (bodid) references tbl_bodegas (bodid))
+ENGINE = InnoDB CHARACTER SET = latin1;
