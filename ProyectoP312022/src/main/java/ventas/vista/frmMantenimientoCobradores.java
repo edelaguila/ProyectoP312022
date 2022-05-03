@@ -119,7 +119,7 @@ public class frmMantenimientoCobradores extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Mantenimiento Vendedores");
+        setTitle("Mantenimiento Cobradores");
         setVisible(true);
 
         btnEliminar.setText("Eliminar");

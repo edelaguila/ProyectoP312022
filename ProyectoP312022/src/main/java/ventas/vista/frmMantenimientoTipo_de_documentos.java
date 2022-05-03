@@ -109,7 +109,7 @@ public class frmMantenimientoTipo_de_documentos extends javax.swing.JInternalFra
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Mantenimiento Vendedores");
+        setTitle("Mantenimiento Tipo de Documento");
         setVisible(true);
 
         btnEliminar.setText("Eliminar");
