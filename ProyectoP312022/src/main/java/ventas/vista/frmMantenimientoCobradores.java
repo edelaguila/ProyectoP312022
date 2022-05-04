@@ -228,6 +228,7 @@ public class frmMantenimientoCobradores extends javax.swing.JInternalFrame {
         label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label9.setText("Estado");
 
+        tablaVendedores.setBackground(new java.awt.Color(153, 255, 153));
         tablaVendedores.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tablaVendedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
