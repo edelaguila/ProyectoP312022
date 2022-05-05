@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ventas.vista;
-import ventas.modelo.daoBitacora;
-import ventas.controlador.clsBitacora;
+package seguridad.vista;
+import seguridad.modelo.daoBitacora;
+import seguridad.controlador.clsBitacora;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
@@ -368,8 +368,6 @@ String obtenerIP() throws UnknownHostException {
 
 daoBitacora daobitacora;
 public void metodoBitacora(){
-daobitacora= new daoBitacora();
-daobitacora.metodoBitacora(String.valueOf(todaysDate),String.valueOf(txtAccion.getText()),Integer.parseInt(txtIdusuario.getText()),Integer.parseInt(txtIdaplicacion.getText()));
         llenadoDeTablas();
 
 }

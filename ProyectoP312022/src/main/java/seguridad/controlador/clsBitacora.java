@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ventas.controlador;
+package seguridad.controlador;
 
 /**
  *
@@ -12,6 +12,7 @@ package ventas.controlador;
 public class clsBitacora {
     int iId_bitacora;
     String sFecha;
+    String sArea;
     String sAccion;
     String sIp;
     String sNombrepc;
@@ -28,8 +29,9 @@ public class clsBitacora {
         this.iId_bitacora = iId_bitacora;
     }
 
-    public clsBitacora(String sFecha, String sAccion, String sIp, String sNombrepc, int iId_usuario,int iId_aplicacion) {
+    public clsBitacora(String sFecha, String sArea, String sAccion, String sIp, String sNombrepc, int iId_usuario,int iId_aplicacion) {
         this.sFecha = sFecha;
+        this.sArea = sArea;
         this.sAccion = sAccion;
         this.sIp = sIp;
         this.sNombrepc = sNombrepc;
@@ -52,6 +54,16 @@ public class clsBitacora {
     public void fSetfecha_Bitacora(String sFecha) {
         this.sFecha = sFecha;
     }
+
+
+    public String fGetarea_Bitacora() {
+        return sArea;
+    }
+
+    public void fSetarea_Bitacora(String sArea) {
+        this.sArea = sArea;
+    }
+
 
     public String fGetaccion_Bitacora() {
         return sAccion;
@@ -100,7 +112,7 @@ public class clsBitacora {
 
     @Override
     public String toString() {
-        return "tbl_bitacora{" + "id_bitacora=" + iId_bitacora + ", fecha=" + sFecha + ", accion=" + sAccion + ", id_usuario=" + iId_usuario +", id_aplicacion=" + iId_aplicacion +", ip=" + sIp +", nombrepc=" + sNombrepc + '}';
+        return "tbl_bitacora{" + "id_bitacora=" + iId_bitacora + ", fecha=" + sFecha + ", area=" + sArea + ", accion=" + sAccion + ", id_usuario=" + iId_usuario +", id_aplicacion=" + iId_aplicacion +", ip=" + sIp +", nombrepc=" + sNombrepc + '}';
     }
     
 }

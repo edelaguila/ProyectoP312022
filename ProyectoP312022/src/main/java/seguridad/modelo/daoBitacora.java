@@ -1,5 +1,5 @@
 
-package ventas.modelo;
+package seguridad.modelo;
 
 
 import java.net.InetAddress;
@@ -11,15 +11,17 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import ventas.controlador.clsBitacora;
+import seguridad.controlador.clsBitacora;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import seguridad.modelo.clsConexion;
-import ventas.vista.frmMantenimientoBitacora;
+import seguridad.vista.frmMantenimientoBitacora;
+import seguridad.controlador.clsUsuario;
 
     //int id_aplicacion;
     //String nombre_aplicacion;
@@ -30,13 +32,15 @@ import ventas.vista.frmMantenimientoBitacora;
  */
 public class daoBitacora {
 
-    private static final String SQL_SELECT = "SELECT id_bitacora, fecha, accion, id_usuario, id_aplicacion, ip, nombrepc FROM tbl_bitacora";
-    private static final String SQL_INSERT = "INSERT INTO tbl_bitacora(fecha, accion, id_usuario, id_aplicacion, ip, nombrepc) VALUES(?, ?, ?, ?, ?, ?)";
-    private static final String SQL_QUERY = "SELECT id_bitacora, fecha, accion, id_usuario, id_aplicacion, ip, nombrepc FROM tbl_bitacora WHERE id_bitacora = ?";
-
+    private static final String SQL_SELECT = "SELECT id_bitacora, fecha, area, accion, id_usuario, id_aplicacion, ip, nombrepc FROM tbl_bitacora";
+    private static final String SQL_INSERT = "INSERT INTO tbl_bitacora(fecha, area, accion, id_usuario, id_aplicacion, ip, nombrepc) VALUES(?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_QUERY = "SELECT id_bitacora, fecha, area, accion, id_usuario, id_aplicacion, ip, nombrepc FROM tbl_bitacora WHERE id_bitacora = ?";
 
 //se agrega metodo para bitacora
 //averiguar IP
+
+ 
+
 
     public List<clsBitacora> select() {
         Connection conn = null;
@@ -52,6 +56,7 @@ public class daoBitacora {
             while (rs.next()) {
                 int id_bitacora = rs.getInt("id_bitacora");
                 String fecha = rs.getString("fecha");
+                String area = rs.getString("area");
                 String accion = rs.getString("accion");
                 String ip = rs.getString("ip");
                 String nombrepc = rs.getString("nombrepc");
@@ -61,6 +66,7 @@ public class daoBitacora {
                 bitacora = new clsBitacora();
                 bitacora.fSetId_Bitacora(id_bitacora);
                 bitacora.fSetfecha_Bitacora(fecha);
+                bitacora.fSetarea_Bitacora(area);
                 bitacora.fSetaccion_Bitacora(accion);
                 bitacora.fSetip_Bitacora(ip);
                 bitacora.fSetnombrepc_Bitacora(nombrepc);
@@ -89,11 +95,12 @@ public class daoBitacora {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setString(1, bitacora.fGetfecha_Bitacora());
-            stmt.setString(2, bitacora.fGetaccion_Bitacora());
-            stmt.setInt(3, bitacora.fGetId_Aplicacion());
-            stmt.setInt(4, bitacora.fGetId_Usuario());
-            stmt.setString(5, bitacora.fGetip_Bitacora());
-            stmt.setString(6, bitacora.fGetnombrepc_Bitacora());
+            stmt.setString(2, bitacora.fGetarea_Bitacora());
+            stmt.setString(3, bitacora.fGetaccion_Bitacora());
+            stmt.setInt(4, bitacora.fGetId_Aplicacion());
+            stmt.setInt(5, bitacora.fGetId_Usuario());
+            stmt.setString(6, bitacora.fGetip_Bitacora());
+            stmt.setString(7, bitacora.fGetnombrepc_Bitacora());
 
 
             System.out.println("ejecutando query:" + SQL_INSERT);
@@ -128,6 +135,7 @@ public class daoBitacora {
             while (rs.next()) {
                 int id_bitacora = rs.getInt("id_bitacora");
                 String fecha = rs.getString("fecha");
+                String area = rs.getString("area");
                 String accion = rs.getString("accion");
                 String ip = rs.getString("ip");
                 String nombrepc = rs.getString("nombrepc");
@@ -137,6 +145,7 @@ public class daoBitacora {
                 bitacora = new clsBitacora();
                 bitacora.fSetId_Bitacora(id_bitacora);
                 bitacora.fSetfecha_Bitacora(fecha);
+                bitacora.fSetarea_Bitacora(area);
                 bitacora.fSetaccion_Bitacora(accion);
                 bitacora.fSetip_Bitacora(ip);
                 bitacora.fSetnombrepc_Bitacora(nombrepc);
@@ -169,10 +178,11 @@ String obtenerIP() throws UnknownHostException {
         return ip.getHostAddress();
     }
  
-public void metodoBitacora(String fecha, String accion, int id_usuario, int id_aplicacion){
+public void metodoBitacora(String fecha, String area, String accion, int id_usuario, int id_aplicacion){
         daoBitacora bitacoraDAO = new daoBitacora();
         clsBitacora bitacoraAInsertar = new clsBitacora();
         bitacoraAInsertar.fSetfecha_Bitacora(fecha);
+        bitacoraAInsertar.fSetarea_Bitacora(area);
         bitacoraAInsertar.fSetaccion_Bitacora(accion); 
         bitacoraAInsertar.fSetId_Usuario(id_usuario);
         bitacoraAInsertar.fSetId_Aplicacion(id_aplicacion);
@@ -186,5 +196,40 @@ public void metodoBitacora(String fecha, String accion, int id_usuario, int id_a
         bitacoraDAO.insert(bitacoraAInsertar);
 
 }
+
+
+
+
+
+
+public int dato( String usuario){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+int queso=3;
+try{
+conn = clsConexion.getConnection();
+stmt = conn.prepareStatement("SELECT usuid FROM tbl_usuario WHERE usunombre = '"+usuario+"'");
+rs = stmt.executeQuery();
+clsBitacora bitacora = new clsBitacora();
+while (rs.next()) {
+queso=rs.getInt("usuid");
+}
+} catch(Exception e){
+
+}
+return queso;
+}
+
+
+
+
+
+
+
+
+
+
+
        
 }

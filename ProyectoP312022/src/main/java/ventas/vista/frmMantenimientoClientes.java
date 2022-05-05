@@ -41,11 +41,12 @@ public class frmMantenimientoClientes extends javax.swing.JInternalFrame {
         modelo.addColumn("ID Vendedor");
         modelo.addColumn("ID Cobrador");
         modelo.addColumn("ID Documento");
+        modelo.addColumn("Orden");
 
         daoClientes clienteDAO = new daoClientes();
         List<clsClientes> clientes = clienteDAO.select();
         tablaVendedores.setModel(modelo);
-        String[] dato = new String[10];
+        String[] dato = new String[11];
         for (int i = 0; i < clientes.size(); i++) {
             dato[0] = Integer.toString(clientes.get(i).fGetid_Clientes());
             dato[1] = clientes.get(i).fGetnombre_Clientes();
@@ -57,6 +58,7 @@ public class frmMantenimientoClientes extends javax.swing.JInternalFrame {
             dato[7] = Integer.toString(clientes.get(i).fGetid_Vendedor());
             dato[8] = Integer.toString(clientes.get(i).fGetid_Cobrador());
             dato[9] = Integer.toString(clientes.get(i).fGetid_Documento());
+            dato[10] = clientes.get(i).fGetorden_Clientes();
             
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
@@ -77,6 +79,7 @@ public class frmMantenimientoClientes extends javax.swing.JInternalFrame {
         txtVendedor.setText(String.valueOf(clienteAConsultar.fGetid_Vendedor()));
         txtCobrador.setText(String.valueOf(clienteAConsultar.fGetid_Cobrador()));
         txtDocumento.setText(String.valueOf(clienteAConsultar.fGetid_Documento()));
+        txtorden.setText(String.valueOf(clienteAConsultar.fGetorden_Clientes()));
     }
 
     public frmMantenimientoClientes() {
@@ -127,6 +130,8 @@ public class frmMantenimientoClientes extends javax.swing.JInternalFrame {
         txtDocumento = new javax.swing.JTextField();
         label11 = new javax.swing.JLabel();
         label12 = new javax.swing.JLabel();
+        txtorden = new javax.swing.JTextField();
+        label13 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -279,6 +284,13 @@ public class frmMantenimientoClientes extends javax.swing.JInternalFrame {
         label12.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label12.setText("Id Cobrador");
 
+        txtorden.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtorden.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtorden.setOpaque(false);
+
+        label13.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label13.setText("Orden");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -286,32 +298,7 @@ public class frmMantenimientoClientes extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label3)
-                            .addComponent(label5)
-                            .addComponent(label7)
-                            .addComponent(label6)
-                            .addComponent(label9)
-                            .addComponent(label8)
-                            .addComponent(label10)
-                            .addComponent(label12)
-                            .addComponent(label11))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                            .addComponent(txtCorreo)
-                            .addComponent(txtEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                            .addComponent(txtTipo)
-                            .addComponent(txtVendedor)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                            .addComponent(txtCobrador, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                            .addComponent(txtDocumento)
-                            .addComponent(txtDireccion))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -324,11 +311,43 @@ public class frmMantenimientoClientes extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label3)
+                                    .addComponent(label5)
+                                    .addComponent(label7)
+                                    .addComponent(label6)
+                                    .addComponent(label9)
+                                    .addComponent(label8)
+                                    .addComponent(label10)
+                                    .addComponent(label12)
+                                    .addComponent(label11))
+                                .addGap(29, 29, 29)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                                    .addComponent(txtCorreo)
+                                    .addComponent(txtEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                                    .addComponent(txtTipo)
+                                    .addComponent(txtVendedor)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                                    .addComponent(txtCobrador, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                                    .addComponent(txtDocumento)
+                                    .addComponent(txtDireccion))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label13)
+                                .addGap(29, 29, 29)
+                                .addComponent(txtorden)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
                         .addGap(30, 30, 30))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -352,52 +371,60 @@ public class frmMantenimientoClientes extends javax.swing.JInternalFrame {
                         .addComponent(label1)
                         .addGap(4, 4, 4)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label4)
-                            .addComponent(cbox_aplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2)))
+                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lb)
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
                                     .addComponent(label3))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtDireccion)
+                                    .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
                                     .addComponent(label5))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTelefono)
+                                    .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
                                     .addComponent(label7))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCorreo)
+                                    .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
                                     .addComponent(label6))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEstado)
+                                    .addComponent(txtEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
                                     .addComponent(label9))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTipo)
+                                    .addComponent(txtTipo, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
                                     .addComponent(label8))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtVendedor)
+                            .addComponent(txtVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                             .addComponent(label10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCobrador)
+                            .addComponent(txtCobrador, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                             .addComponent(label12))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDocumento)
+                            .addComponent(txtDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                             .addComponent(label11))
-                        .addGap(27, 27, 27)
+                        .addGap(20, 20, 20)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label4)
+                            .addComponent(cbox_aplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2))
+                        .addGap(42, 42, 42))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtorden, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                            .addComponent(label13))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnRegistrar)
                             .addComponent(btnEliminar)
@@ -405,8 +432,7 @@ public class frmMantenimientoClientes extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBuscar)
-                            .addComponent(btnLimpiar))))
-                .addGap(38, 38, 38))
+                            .addComponent(btnLimpiar)))))
         );
 
         pack();
@@ -434,6 +460,7 @@ public class frmMantenimientoClientes extends javax.swing.JInternalFrame {
         clienteAInsertar.fSetid_Vendedor(Integer.parseInt(txtVendedor.getText()));
         clienteAInsertar.fSetid_Cobrador(Integer.parseInt(txtCobrador.getText()));
         clienteAInsertar.fSetid_Documento(Integer.parseInt(txtDocumento.getText()));
+        clienteAInsertar.fSetorden_Clientes(txtorden.getText());
         clienteDAO.insert(clienteAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -457,6 +484,7 @@ public class frmMantenimientoClientes extends javax.swing.JInternalFrame {
         clienteAActualizar.fSetid_Vendedor(Integer.parseInt(txtVendedor.getText()));
         clienteAActualizar.fSetid_Cobrador(Integer.parseInt(txtCobrador.getText()));
         clienteAActualizar.fSetid_Documento(Integer.parseInt(txtDocumento.getText()));
+        clienteAActualizar.fSetorden_Clientes(txtorden.getText());
         clienteDAO.update(clienteAActualizar);
         llenadoDeTablas();        
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -516,6 +544,7 @@ public class frmMantenimientoClientes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label10;
     private javax.swing.JLabel label11;
     private javax.swing.JLabel label12;
+    private javax.swing.JLabel label13;
     private javax.swing.JLabel label3;
     private javax.swing.JLabel label4;
     private javax.swing.JLabel label5;
@@ -537,5 +566,6 @@ public class frmMantenimientoClientes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTipo;
     private javax.swing.JTextField txtVendedor;
     private javax.swing.JTextField txtbuscado;
+    private javax.swing.JTextField txtorden;
     // End of variables declaration//GEN-END:variables
 }
