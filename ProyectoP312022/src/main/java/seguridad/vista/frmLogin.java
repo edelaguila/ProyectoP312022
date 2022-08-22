@@ -9,7 +9,7 @@ package seguridad.vista;
 
 import seguridad.controlador.clsUsuario;
 import java.awt.HeadlessException;
-
+import ventas.vista.mdiVentas;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import prototipos.vista.mdiPrototipo;
@@ -189,7 +189,16 @@ public class frmLogin extends javax.swing.JFrame {
                         } catch (Exception e) {
                             System.out.println(e);
                         }
-                        break;                        
+                        break;     
+                        case "Area Ventas":
+                        try {
+                            mdiVentas menuPrototipo = new mdiVentas();
+                            menuPrototipo.setVisible(true);
+                            this.dispose();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                        break;                    
                         default:
                             break;
                     }
